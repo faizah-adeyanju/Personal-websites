@@ -1,0 +1,622 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faizah Adeyanju - Personal Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #007bff; /* A shade of blue */
+            --secondary-color: #f8f9fa; /* White/light grey */
+            --text-color: #343a40; /* Dark grey/black */
+            --bg-dark: #212529; /* Dark background for some sections/footer */
+            --light-blue: #e0f2f7;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--bg-dark);
+            color: var(--secondary-color);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--secondary-color);
+            font-weight: 500;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+
+        /* Sections General */
+        section {
+            padding: 80px 0;
+            margin-top: 70px; /* Offset for fixed header */
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--light-blue);
+        }
+
+        h1, h2, h3 {
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -10px;
+            border-radius: 2px;
+        }
+
+        /* Home Section */
+        #home {
+            background: var(--bg-dark); /* Dark background */
+            color: var(--secondary-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin-top: 0; /* No margin-top for full height */
+        }
+
+        #home h1 {
+            font-size: 4em;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        #home p {
+            font-size: 1.5em;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--secondary-color);
+        }
+
+        /* About Me Section */
+        #about p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1em;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .skill-item {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        .skill-item h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .progress-bar-container {
+            background-color: #e9ecef;
+            border-radius: 5px;
+            height: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%; /* Will be set by JS or directly in HTML */
+            border-radius: 5px;
+            transition: width 1s ease-in-out;
+        }
+
+        /* Education Section */
+        .education-item {
+            background-color: var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: left;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .education-item h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .education-item p {
+            margin: 5px 0;
+        }
+
+        .education-item .date {
+            font-style: italic;
+            color: #6c757d;
+        }
+
+        /* Hobbies & Interests, Goals Sections */
+        .grid-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .grid-item {
+            background-color: var(--secondary-color);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .grid-item i {
+            font-size: 3em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .grid-item h3 {
+            color: var(--primary-color);
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* Contact Section */
+        #contact .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        #contact .contact-item {
+            background-color: var(--secondary-color);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            flex: 1 1 250px;
+            max-width: 300px;
+        }
+
+        #contact .contact-item i {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        #contact .contact-item p {
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-dark);
+            color: var(--secondary-color);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: 50px;
+        }
+
+        footer .social-links a {
+            color: var(--secondary-color);
+            margin: 0 10px;
+            font-size: 1.5em;
+            transition: color 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 1.5em;
+            }
+
+            nav ul {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: var(--bg-dark);
+                position: absolute;
+                top: 70px; /* Below the header */
+                left: 0;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            #home h1 {
+                font-size: 3em;
+            }
+
+            #home p {
+                font-size: 1.2em;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            .skills-grid, .grid-section, #contact .contact-info {
+                grid-template-columns: 1fr;
+            }
+
+            #contact .contact-item {
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">Faizah Adeyanju</div>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#hobbies">Hobbies</a></li>
+                    <li><a href="#goals">Goals</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger-menu">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home">
+        <div class="container">
+            <h1>Hello, I'm Faizah Adeyanju</h1>
+            <p>A passionate and driven individual ready to make an impact. Welcome to my personal space!</p>
+            <img src="https://avatars.githubusercontent.com/u/188912290?s=400&u=c6af60c46d66dbc9d2013250086e799d3d83b10f&v=4" alt="Faizah Adeyanju" style="max-width: 250px; border-radius: 50%; margin-top: 30px; border: 5px solid var(--primary-color);">
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>
+                <!-- Placeholder for About Me content -->
+                I am a highly motivated and enthusiastic individual with a strong desire to learn and grow.
+                My journey in [YOUR FIELD/INTERESTS] has equipped me with a unique perspective and a problem-solving mindset.
+                I thrive in dynamic environments and am always eager to take on new challenges.
+                My family, including my supportive mum, encouraging dad, and inspiring brother, forms the core of my personal journey.
+            </p>
+            <p>
+                I believe in continuous learning and currently focusing on expanding my knowledge in [specific area/technology].
+                I am excited about the future and committed to making meaningful contributions.
+            </p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <h3>Programming Languages</h3>
+                    <p>Python</p>
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: 90%;"></div></div>
+                    <p>JavaScript</p>
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div>
+                    <p>HTML/CSS</p>
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: 95%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <h3>Tools & Technologies</h3>
+                    <p>Git/GitHub</p>
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: 85%;"></div></div>
+                    <p>Docker</p>
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: 60%;"></div></div>
+                    <p>Cloud Platforms (e.g., GCP, AWS)</p>
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: 70%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <h3>Soft Skills</h3>
+                    <p>Problem Solving</p>
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: 90%;"></div></div>
+                    <p>Teamwork</p>
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: 88%;"></div></div>
+                    <p>Communication</p>
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: 92%;"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>University Name</h3>
+                <p>Degree in [Your Major]</p>
+                <p class="date">[Start Date] - [End Date]</p>
+                <p>Relevant Coursework: [List courses]</p>
+                <p>Achievements: [Honors, Awards, Projects]</p>
+            </div>
+            <div class="education-item">
+                <h3>College/High School Name</h3>
+                <p>Diploma/Certificate in [Your Area of Study]</p>
+                <p class="date">[Start Date] - [End Date]</p>
+                <p>Key Subjects: [List subjects]</p>
+            </div>
+            <!-- Add more education items as needed -->
+        </div>
+    </section>
+
+    <section id="hobbies">
+        <div class="container">
+            <h2>Hobbies & Interests</h2>
+            <div class="grid-section">
+                <div class="grid-item">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Reading</h3>
+                    <p>Exploring various genres, from fiction to non-fiction, to expand my knowledge and perspective.</p>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-code"></i>
+                    <h3>Coding Projects</h3>
+                    <p>Working on personal coding projects to learn new technologies and sharpen my skills.</p>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-palette"></i>
+                    <h3>Art & Design</h3>
+                    <p>Enjoying creative outlets like sketching, digital art, or graphic design.</p>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-walking"></i>
+                    <h3>Hiking</h3>
+                    <p>Discovering new trails and enjoying nature's beauty to relax and recharge.</p>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Cooking</h3>
+                    <p>Experimenting with new recipes and cuisines, and enjoying the process of creating delicious meals.</p>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-headphones-alt"></i>
+                    <h3>Listening to Music</h3>
+                    <p>Discovering new artists and genres, and finding inspiration and relaxation in various melodies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="goals">
+        <div class="container">
+            <h2>Goals</h2>
+            <div class="grid-section">
+                <div class="grid-item">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Continuous Learning</h3>
+                    <p>To constantly acquire new skills and knowledge in emerging technologies and industry best practices.</p>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Career Advancement</h3>
+                    <p>To secure a challenging role where I can apply my skills and contribute to impactful projects.</p>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Networking</h3>
+                    <p>To connect with professionals in my field and build a strong network of peers and mentors.</p>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-globe"></i>
+                    <h3>Global Impact</h3>
+                    <p>To work on projects that have a positive impact on a global scale.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p><a href="mailto:YOUR_EMAIL@example.com">YOUR_EMAIL@example.com</a></p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Phone</h3>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <h3>LinkedIn</h3>
+                    <p><a href="YOUR_LINKEDIN_PROFILE_URL" target="_blank">linkedin.com/in/yourprofile</a></p>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <h3>GitHub</h3>
+                    <p><a href="YOUR_GITHUB_PROFILE_URL" target="_blank">github.com/yourusername</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Faizah Adeyanju. All rights reserved.</p>
+            <div class="social-links">
+                <a href="YOUR_TWITTER_URL" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="YOUR_INSTAGRAM_URL" target="_blank"><i class="fab fa-instagram"></i></a>
+                <!-- Add more social media links as needed -->
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+
+            // Mobile menu toggle
+            const hamburger = document.getElementById('hamburger-menu');
+            const navLinks = document.getElementById('nav-links');
+
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Simple animation for progress bars on scroll
+            const skillSection = document.getElementById('skills');
+            const progressBars = document.querySelectorAll('.progress-bar');
+
+            const animateProgressBars = () => {
+                const sectionTop = skillSection.getBoundingClientRect().top;
+                const viewportHeight = window.innerHeight;
+
+                if (sectionTop < viewportHeight * 0.75) { // When section is 75% in view
+                    progressBars.forEach(bar => {
+                        const width = bar.style.width; // Get target width from inline style
+                        bar.style.width = width; // Re-set to trigger transition
+                    });
+                    window.removeEventListener('scroll', animateProgressBars); // Run once
+                }
+            };
+
+            window.addEventListener('scroll', animateProgressBars);
+            // Trigger it once in case the section is already in view on load
+            animateProgressBars();
+        });
+    </script>
+</body>
+</html>
